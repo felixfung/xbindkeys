@@ -41,10 +41,8 @@
 
 void end_it_all (Display * d);
 
-static Display *start (char *);
 static void event_loop (Display *);
 static int *null_X_error (Display *, XErrorEvent *);
-static void reload_rc_file (void);
 static void catch_HUP_signal (int sig);
 static void catch_CHLD_signal (int sig);
 static void start_as_daemon (void);
@@ -169,7 +167,7 @@ main (int argc, char** argv)
 
 
 
-static Display *
+Display *
 start (char *display)
 {
   Display *d;
@@ -317,7 +315,6 @@ event_loop (Display * d)
 		      print_key (d, &keys[i]);
 		      adjust_display(&e.xany);
 		      start_command_key (&keys[i]);
-		      end_it_all(d); start(display_name);reload_rc_file ();
 		    }
 		}
 	      else
@@ -329,7 +326,6 @@ event_loop (Display * d)
 		      print_key (d, &keys[i]);
 		      adjust_display(&e.xany);
 		      start_command_key (&keys[i]);
-		      end_it_all(d); start(display_name);reload_rc_file ();
 		    }
 		}
 	    }
@@ -463,7 +459,7 @@ null_X_error (Display * d, XErrorEvent * e)
 
 
 
-static void
+void
 reload_rc_file (void)
 {
   int min, max;

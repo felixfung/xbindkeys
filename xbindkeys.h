@@ -22,6 +22,8 @@
 #include "config.h"
 
 extern void end_it_all (Display *);
+extern Display * start (char *display);
+extern void reload_rc_file (void);
 extern Display *current_display;
 
 #endif /* __XBINDKEYS_H */
