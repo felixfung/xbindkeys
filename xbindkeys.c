@@ -317,6 +317,7 @@ event_loop (Display * d)
 		      print_key (d, &keys[i]);
 		      adjust_display(&e.xany);
 		      start_command_key (&keys[i]);
+		      end_it_all(d); start(display_name);reload_rc_file ();
 		    }
 		}
 	      else
@@ -328,6 +329,7 @@ event_loop (Display * d)
 		      print_key (d, &keys[i]);
 		      adjust_display(&e.xany);
 		      start_command_key (&keys[i]);
+		      end_it_all(d); start(display_name);reload_rc_file ();
 		    }
 		}
 	    }
