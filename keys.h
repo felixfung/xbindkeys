@@ -53,6 +53,7 @@ typedef struct
   char *command;
   SCM function;    // This is to call a scheme function instead of a shell command
                    // when command == NULL (not used when guile is not used).
+  int skippy;      // bool is not #included
 }
 Keys_t;
 

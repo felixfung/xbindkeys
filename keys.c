@@ -263,6 +263,7 @@ set_keysym (Keys_t * key, EventType_t event_type, KeySym keysym,
   key->event_type = event_type;
   key->key.sym = keysym;
   key->modifier = modifier;
+  key->skippy = 0;
 
   if (command != NULL)
 	{
@@ -289,6 +290,7 @@ set_keycode (Keys_t * key, EventType_t event_type, KeyCode keycode,
   key->event_type = event_type;
   key->key.code = keycode;
   key->modifier = modifier;
+  key->skippy = 0;
 
   if (command != NULL)
 	  {
@@ -316,6 +318,7 @@ set_button (Keys_t * key, EventType_t event_type, unsigned int button,
   key->event_type = event_type;
   key->key.button = button;
   key->modifier = modifier;
+  key->skippy = 0;
 
   if (command != NULL)
     {
@@ -342,6 +345,7 @@ free_key (Keys_t * key)
   key->event_type = PRESS;
   key->key.sym = 0;
   key->modifier = 0;
+  key->skippy = 0;
 
   if (key->command != NULL)
     free (key->command);
@@ -462,4 +466,10 @@ start_command_key (Keys_t * key)
     }
 
   run_command (key->command);
+
+  if (key->skippy) {
+    end_it_all (current_display);
+    start (display_name);
+    reload_rc_file ();
+  }
 }
